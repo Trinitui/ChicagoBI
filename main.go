@@ -199,10 +199,21 @@ func GetCCVI(db *sql.DB) {
 	fmt.Println("Grabbing data from Chicago Data...")
 	var url = "https://data.cityofchicago.org/resource/xhc6-88s9.json"
 
-	res, err := http.Get(url)
+	tr := &http.Transport{
+		MaxIdleConns:        10,
+		IdleConnTimeout:     300 * time.Second,
+		DisableCompression:  true,
+		TLSHandshakeTimeout: 1000 * time.Second,
+	}
+
+	client := &http.Client{Transport: tr}
+
+	res, err := client.Get(url)
+
 	if err != nil {
 		panic(err)
 	}
+
 	fmt.Println("Starting JSON unmarshalling...")
 	body, _ := ioutil.ReadAll(res.Body)
 	var ccvi_list CCVIJsonRecords
@@ -309,10 +320,21 @@ func GetCovidData(db *sql.DB) {
 	fmt.Println("Grabbing data from Chicago Data...")
 	var url = "https://data.cityofchicago.org/resource/yhhz-zm2v.json"
 
-	res, err := http.Get(url)
+	tr := &http.Transport{
+		MaxIdleConns:        10,
+		IdleConnTimeout:     300 * time.Second,
+		DisableCompression:  true,
+		TLSHandshakeTimeout: 1000 * time.Second,
+	}
+
+	client := &http.Client{Transport: tr}
+
+	res, err := client.Get(url)
+
 	if err != nil {
 		panic(err)
 	}
+
 	fmt.Println("Starting JSON unmarshalling...")
 	body, _ := ioutil.ReadAll(res.Body)
 	var covid_list CovidDataJsonRecords
@@ -422,10 +444,21 @@ func GetBuildingPermits(db *sql.DB) {
 	fmt.Println("Grabbing data from Chicago Data...")
 	var url = "https://data.cityofchicago.org/resource/ydr8-5enu.json"
 
-	res, err := http.Get(url)
+	tr := &http.Transport{
+		MaxIdleConns:        10,
+		IdleConnTimeout:     300 * time.Second,
+		DisableCompression:  true,
+		TLSHandshakeTimeout: 1000 * time.Second,
+	}
+
+	client := &http.Client{Transport: tr}
+
+	res, err := client.Get(url)
+
 	if err != nil {
 		panic(err)
 	}
+
 	fmt.Println("Starting JSON unmarshalling...")
 	body, _ := ioutil.ReadAll(res.Body)
 	var building_permits_list BuildingPermitsJsonRecords
@@ -904,10 +937,21 @@ func GetUnemploymentData(db *sql.DB) {
 	fmt.Println("Grabbing data from Chicago Data...")
 	var url = "https://data.cityofchicago.org/resource/iqnk-2tcu.json"
 
-	res, err := http.Get(url)
+	tr := &http.Transport{
+		MaxIdleConns:        10,
+		IdleConnTimeout:     300 * time.Second,
+		DisableCompression:  true,
+		TLSHandshakeTimeout: 1000 * time.Second,
+	}
+
+	client := &http.Client{Transport: tr}
+
+	res, err := client.Get(url)
+
 	if err != nil {
 		panic(err)
 	}
+
 	fmt.Println("Starting JSON unmarshalling...")
 	body, _ := ioutil.ReadAll(res.Body)
 	var unemployment_list UnemploymentJsonRecords
