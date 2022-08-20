@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"net"
 	"net/http"
 	"os"
 	"strconv"
@@ -527,10 +528,27 @@ func GetTaxiTrips(db *sql.DB) int {
 	fmt.Println("Grabbing data from Chicago Data...")
 	var url = "https://data.cityofchicago.org/resource/wrvz-psew.json"
 
-	res, err := http.Get(url)
+	tr := &http.Transport{
+		MaxIdleConns:          10,
+		IdleConnTimeout:       1000 * time.Second,
+		TLSHandshakeTimeout:   1000 * time.Second,
+		ExpectContinueTimeout: 1000 * time.Second,
+		DisableCompression:    true,
+		Dial: (&net.Dialer{
+			Timeout:   1000 * time.Second,
+			KeepAlive: 1000 * time.Second,
+		}).Dial,
+		ResponseHeaderTimeout: 1000 * time.Second,
+	}
+
+	client := &http.Client{Transport: tr}
+
+	res, err := client.Get(url)
+
 	if err != nil {
 		panic(err)
 	}
+
 	fmt.Println("Starting JSON unmarshalling...")
 	body, _ := ioutil.ReadAll(res.Body)
 	var taxi_trips_list TaxiTripsJsonRecords
@@ -707,10 +725,27 @@ func GetTransportTrips(db *sql.DB) {
 	fmt.Println("Grabbing data from Chicago Data...")
 	var url = "https://data.cityofchicago.org/resource/m6dm-c72p.json"
 
-	res, err := http.Get(url)
+	tr := &http.Transport{
+		MaxIdleConns:          10,
+		IdleConnTimeout:       1000 * time.Second,
+		TLSHandshakeTimeout:   1000 * time.Second,
+		ExpectContinueTimeout: 1000 * time.Second,
+		DisableCompression:    true,
+		Dial: (&net.Dialer{
+			Timeout:   1000 * time.Second,
+			KeepAlive: 1000 * time.Second,
+		}).Dial,
+		ResponseHeaderTimeout: 1000 * time.Second,
+	}
+
+	client := &http.Client{Transport: tr}
+
+	res, err := client.Get(url)
+
 	if err != nil {
 		panic(err)
 	}
+
 	fmt.Println("TRANSPORTS: Starting JSON unmarshalling...")
 	body, _ := ioutil.ReadAll(res.Body)
 	var transport_trips_list TransportTripsJsonRecords
