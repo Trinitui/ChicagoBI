@@ -543,7 +543,7 @@ func GetTaxiTrips(db *sql.DB) {
 	fmt.Println("Now unpacking JSON and inserting into db... ")
 	for i := 0; i < len(taxi_trips_list); i++ {
 
-		fmt.Println(i)
+		fmt.Println(taxi_trips_list[i])
 
 		// We will execute definsive coding to check for messy/dirty/missing data values
 		// Any record that has messy/dirty/missing data we don't enter it in the data lake/table
@@ -621,6 +621,12 @@ func GetTaxiTrips(db *sql.DB) {
 		}
 
 		dropoff_address_list, _ := geocoder.GeocodingReverse(dropoff_location)
+
+		if len(dropoff_address_list) == 0 {
+			fmt.Printf("No results found for crash at latitude : %f and Longitude : %f \n", dropoff_centroid_latitude_float, dropoff_centroid_longitude_float)
+			continue
+		}
+
 		dropoff_address := dropoff_address_list[0]
 		dropoff_zip_code := dropoff_address.PostalCode
 
@@ -706,7 +712,7 @@ func GetTransportTrips(db *sql.DB) {
 	fmt.Println("TRANSPORTS: JSON unmarshalling done...")
 	fmt.Println("TRANSPORTS: Now unpacking JSON and inserting into db... ")
 	for i := 0; i < len(transport_trips_list); i++ {
-		fmt.Println(i)
+		//fmt.Println(transport_trips_list[i])
 
 		// We will execute definsive coding to check for messy/dirty/missing data values
 		// Any record that has messy/dirty/missing data we don't enter it in the data lake/table
@@ -769,6 +775,12 @@ func GetTransportTrips(db *sql.DB) {
 		}
 
 		pickup_address_list, _ := geocoder.GeocodingReverse(pickup_location)
+
+		if len(pickup_address_list) == 0 {
+			fmt.Printf("No results found for crash at latitude : %f and Longitude : %f \n", pickup_centroid_latitude_float, pickup_centroid_longitude_float)
+			continue
+		}
+
 		pickup_address := pickup_address_list[0]
 		pickup_zip_code := pickup_address.PostalCode
 
