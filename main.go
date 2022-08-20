@@ -415,7 +415,7 @@ func GetBuildingPermits(db *sql.DB) {
 
 	create_table := `CREATE TABLE IF NOT EXISTS "building_permits" (
 						"id"   SERIAL , 
-						"permit_id" VARCHAR(255) UNIQUE, 
+						"permit_id" VARCHAR(255), 
 						"permit_issue_date" DATE, 
 						"community_area" INT, 
 						PRIMARY KEY ("id") 
@@ -509,7 +509,7 @@ func GetTaxiTrips(db *sql.DB) int {
 
 	create_table := `CREATE TABLE IF NOT EXISTS "taxi_trips" (
 						"id"   SERIAL , 
-						"trip_id" VARCHAR(255) UNIQUE, 
+						"trip_id" VARCHAR(255), 
 						"trip_start_timestamp" TIMESTAMP WITH TIME ZONE, 
 						"trip_end_timestamp" TIMESTAMP WITH TIME ZONE, 
 						"pickup_centroid_latitude" DOUBLE PRECISION, 
@@ -547,7 +547,7 @@ func GetTaxiTrips(db *sql.DB) int {
 	}
 	for i := 0; i < len(taxi_trips_list); i++ {
 
-		fmt.Println(taxi_trips_list[i])
+		//fmt.Println(taxi_trips_list[i])
 
 		// We will execute definsive coding to check for messy/dirty/missing data values
 		// Any record that has messy/dirty/missing data we don't enter it in the data lake/table
@@ -683,7 +683,7 @@ func GetTransportTrips(db *sql.DB) {
 
 	create_table := `CREATE TABLE IF NOT EXISTS "transport_trips" (
 						"id"   SERIAL , 
-						"trip_id" VARCHAR(255) UNIQUE, 
+						"trip_id" VARCHAR(255), 
 						"trip_start_timestamp" TIMESTAMP WITH TIME ZONE, 
 						"trip_end_timestamp" TIMESTAMP WITH TIME ZONE, 
 						"pickup_centroid_latitude" DOUBLE PRECISION, 
