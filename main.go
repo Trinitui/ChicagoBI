@@ -542,7 +542,9 @@ func GetTaxiTrips(db *sql.DB) {
 	fmt.Println("JSON unmarshalling done...")
 	fmt.Println("Now unpacking JSON and inserting into db... ")
 	for i := 0; i < len(taxi_trips_list); i++ {
+
 		fmt.Println(i)
+
 		// We will execute definsive coding to check for messy/dirty/missing data values
 		// Any record that has messy/dirty/missing data we don't enter it in the data lake/table
 
@@ -704,6 +706,7 @@ func GetTransportTrips(db *sql.DB) {
 	fmt.Println("TRANSPORTS: JSON unmarshalling done...")
 	fmt.Println("TRANSPORTS: Now unpacking JSON and inserting into db... ")
 	for i := 0; i < len(transport_trips_list); i++ {
+		fmt.Println(i)
 
 		// We will execute definsive coding to check for messy/dirty/missing data values
 		// Any record that has messy/dirty/missing data we don't enter it in the data lake/table
