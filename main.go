@@ -115,12 +115,18 @@ func main() {
 	for {
 		// build and fine-tune functions to pull data from different data sources
 		// This is a code snippet to show you how to pull data from different data sources.
-		go GetCCVI(db)
-		go GetCovidData(db)
-		go GetBuildingPermits(db)
-		go GetTaxiTrips(db)
-		go GetTransportTrips(db)
-		go GetUnemploymentData(db)
+		GetCCVI(db)
+		fmt.Println("Done with CCVI")
+		GetCovidData(db)
+		fmt.Println("Done with CovidData")
+		GetBuildingPermits(db)
+		fmt.Println("Done with BP")
+		GetTaxiTrips(db)
+		fmt.Println("Done with Taxis")
+		GetTransportTrips(db)
+		fmt.Println("Done with Transport Trips")
+		GetUnemploymentData(db)
+		fmt.Println("Done with Unemployment")
 
 		http.HandleFunc("/", handler)
 
