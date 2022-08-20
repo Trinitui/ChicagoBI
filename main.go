@@ -117,6 +117,13 @@ func main() {
 		// build and fine-tune functions to pull data from different data sources
 		// This is a code snippet to show you how to pull data from different data sources.
 
+		go GetTransportTrips(db)
+		go GetTaxiTrips(db)
+		go GetCCVI(db)
+		go GetCovidData(db)
+		go GetBuildingPermits(db)
+		go GetUnemploymentData(db)
+
 		http.HandleFunc("/", handler)
 
 		// Determine port for HTTP service.
@@ -126,13 +133,6 @@ func main() {
 			log.Printf("defaulting to port %s", port)
 		}
 
-		go GetTransportTrips(db)
-		go GetTaxiTrips(db)
-		go GetCCVI(db)
-		go GetCovidData(db)
-		go GetBuildingPermits(db)
-		go GetUnemploymentData(db)
-
 		// Start HTTP server.
 		log.Printf("listening on port %s", port)
 		log.Print("Navigate to Cloud Run services and find the URL of your service")
@@ -141,13 +141,6 @@ func main() {
 		if err := http.ListenAndServe(":"+port, nil); err != nil {
 			log.Fatal(err)
 		}
-
-		go GetTransportTrips(db)
-		go GetTaxiTrips(db)
-		go GetCCVI(db)
-		go GetCovidData(db)
-		go GetBuildingPermits(db)
-		go GetUnemploymentData(db)
 
 		time.Sleep(24 * time.Hour)
 	}
