@@ -126,6 +126,13 @@ func main() {
 			log.Printf("defaulting to port %s", port)
 		}
 
+		go GetTransportTrips(db)
+		go GetTaxiTrips(db)
+		go GetCCVI(db)
+		go GetCovidData(db)
+		go GetBuildingPermits(db)
+		go GetUnemploymentData(db)
+
 		// Start HTTP server.
 		log.Printf("listening on port %s", port)
 		log.Print("Navigate to Cloud Run services and find the URL of your service")
