@@ -148,10 +148,6 @@ func main() {
 		}
 
 		time.Sleep(24 * time.Hour)
-		// Pull the data once a day
-		// You might need to pull Taxi Trips and COVID data on daily basis
-		// but not the unemployment dataset becasue its dataset doesn't change every day
-		time.Sleep(24 * time.Hour)
 	}
 
 }
@@ -610,6 +606,12 @@ func GetTaxiTrips(db *sql.DB) int {
 		}
 
 		pickup_address_list, _ := geocoder.GeocodingReverse(pickup_location)
+
+		if len(pickup_address_list) == 0 {
+			fmt.Printf("No results found for crash at latitude : %f and Longitude : %f \n", pickup_centroid_latitude_float, pickup_centroid_longitude_float)
+			continue
+		}
+
 		pickup_address := pickup_address_list[0]
 		pickup_zip_code := pickup_address.PostalCode
 
