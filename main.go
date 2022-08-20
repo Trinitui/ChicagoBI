@@ -484,7 +484,7 @@ func GetBuildingPermits(db *sql.DB) {
 
 }
 
-func GetTaxiTrips(db *sql.DB) {
+func GetTaxiTrips(db *sql.DB) int {
 
 	// This function is NOT complete
 	// It provides code-snippets for the data source: https://data.cityofchicago.org/Transportation/Taxi-Trips/wrvz-psew
@@ -541,6 +541,10 @@ func GetTaxiTrips(db *sql.DB) {
 	json.Unmarshal(body, &taxi_trips_list)
 	fmt.Println("JSON unmarshalling done...")
 	fmt.Println("Now unpacking JSON and inserting into db... ")
+	if len(taxi_trips_list) == 0 {
+		fmt.Println("No Data in Taxi Trips")
+		return 0
+	}
 	for i := 0; i < len(taxi_trips_list); i++ {
 
 		fmt.Println(taxi_trips_list[i])
