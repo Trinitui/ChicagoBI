@@ -655,7 +655,7 @@ func GetTaxiTrips(db *sql.DB) int {
 
 	}
 	fmt.Println("== Done with Taxi Trips ==")
-
+	return 1
 }
 
 func GetTransportTrips(db *sql.DB) {
