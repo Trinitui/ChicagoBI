@@ -800,6 +800,12 @@ func GetTransportTrips(db *sql.DB) {
 		}
 
 		dropoff_address_list, _ := geocoder.GeocodingReverse(dropoff_location)
+
+		if len(dropoff_address_list) == 0 {
+			fmt.Printf("No results found for crash at latitude : %f and Longitude : %f \n", dropoff_centroid_latitude_float, dropoff_centroid_longitude_float)
+			continue
+		}
+
 		dropoff_address := dropoff_address_list[0]
 		dropoff_zip_code := dropoff_address.PostalCode
 
