@@ -115,7 +115,9 @@ func main() {
 	for {
 		// build and fine-tune functions to pull data from different data sources
 		// This is a code snippet to show you how to pull data from different data sources.
-		go GetTaxiTrips(db)
+		GetTransportTrips(db)
+		fmt.Println("Done with Transport Trips")
+		GetTaxiTrips(db)
 		fmt.Println("Done with Taxis")
 
 		GetCCVI(db)
@@ -124,8 +126,7 @@ func main() {
 		fmt.Println("Done with CovidData")
 		GetBuildingPermits(db)
 		fmt.Println("Done with BP")
-		GetTransportTrips(db)
-		fmt.Println("Done with Transport Trips")
+
 		GetUnemploymentData(db)
 		fmt.Println("Done with Unemployment")
 
@@ -697,12 +698,12 @@ func GetTransportTrips(db *sql.DB) {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("Starting JSON unmarshalling...")
+	fmt.Println("TRANSPORTS: Starting JSON unmarshalling...")
 	body, _ := ioutil.ReadAll(res.Body)
 	var transport_trips_list TransportTripsJsonRecords
 	json.Unmarshal(body, &transport_trips_list)
-	fmt.Println("JSON unmarshalling done...")
-	fmt.Println("Now unpacking JSON and inserting into db... ")
+	fmt.Println("TRANSPORTS: JSON unmarshalling done...")
+	fmt.Println("TRANSPORTS: Now unpacking JSON and inserting into db... ")
 	for i := 0; i < len(transport_trips_list); i++ {
 
 		// We will execute definsive coding to check for messy/dirty/missing data values
