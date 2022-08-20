@@ -1,6 +1,5 @@
 package main
 
-
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 //
@@ -17,7 +16,6 @@ package main
 //
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
-
 
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
@@ -195,11 +193,10 @@ type CCVIJsonRecords []struct {
 	CCVI_category              string `json:"ccvi_category"`
 }
 
-
 // Declare my database connection
 var db *sql.DB
 
-// The main package can has the init function. 
+// The main package can has the init function.
 // The init function will be triggered before the main function
 
 func init() {
@@ -224,7 +221,7 @@ func init() {
 
 	//Option 4
 	//Database application running on Google Cloud Platform.
-	db_connection := "user=postgres dbname=chicago_business_intelligence password=root host=/cloudsql/ADD_YOUR_CONNECTION_NAME_FROM_GCP sslmode=disable port = 5432"
+	db_connection := "user=postgres dbname=chicago_business_intelligence password=root host=/cloudsql/finalproject-p3:us-central1:mypostgres sslmode=disable port = 5432"
 
 	db, err = sql.Open("postgres", db_connection)
 	if err != nil {
@@ -240,7 +237,6 @@ func init() {
 	//}
 
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -306,10 +302,8 @@ func main() {
 
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
-
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	name := os.Getenv("PROJECT_ID")
@@ -338,7 +332,7 @@ func GetTaxiTrips(db *sql.DB) {
 	// Get your geocoder.ApiKey from here :
 	// https://developers.google.com/maps/documentation/geocoding/get-api-key?authuser=2
 
-	geocoder.ApiKey = "ADD_YOUR_API_KEY_HERE"
+	geocoder.ApiKey = "AIzaSyB-JwmMaEwb3yEomj66SnNlkA5GyKcRfWU"
 
 	drop_table := `drop table if exists taxi_trips`
 	_, err := db.Exec(drop_table)
@@ -401,7 +395,6 @@ func GetTaxiTrips(db *sql.DB) {
 	var taxi_trips_list_1 TaxiTripsJsonRecords
 	json.Unmarshal(body_1, &taxi_trips_list_1)
 
-
 	// Get the Taxi Trip list for rideshare companies like Uber/Lyft list
 	// Transportation-Network-Providers-Trips:
 	var url_2 = "https://data.cityofchicago.org/resource/m6dm-c72p.json?$limit=500"
@@ -420,11 +413,9 @@ func GetTaxiTrips(db *sql.DB) {
 	s := fmt.Sprintf("\n\n Transportation-Network-Providers-Trips number of SODA records received = %d\n\n", len(taxi_trips_list_2))
 	io.WriteString(os.Stdout, s)
 
-
 	// Add the Taxi medallions list & rideshare companies like Uber/Lyft list
 
 	taxi_trips_list := append(taxi_trips_list_1, taxi_trips_list_2...)
-
 
 	// Process the list
 
@@ -1164,7 +1155,7 @@ func GetBuildingPermits(db *sql.DB) {
 func GetCovidDetails(db *sql.DB) {
 
 	fmt.Println("ADD-YOUR-CODE-HERE - To Implement GetCovidDetails")
-	
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -1199,5 +1190,5 @@ func GetCovidDetails(db *sql.DB) {
 func GetCCVIDetails(db *sql.DB) {
 
 	fmt.Println("ADD-YOUR-CODE-HERE - To Implement GetCCVIDetails")
-	
+
 }
