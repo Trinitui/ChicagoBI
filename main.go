@@ -553,7 +553,7 @@ func GetTaxiTrips(db *sql.DB) int {
 	// While doing unit-testing keep the limit value to 500
 	// later you could change it to 1000, 2000, 10,000, etc.
 	fmt.Println("TaxiTrips: Grabbing data from Chicago Data...")
-	var url = "https://data.cityofchicago.org/resource/npd7-ywjz.json?$limit=1000000"
+	var url = "https://data.cityofchicago.org/resource/wrvz-psew.json?$limit=1000000"
 
 	tr := &http.Transport{
 		MaxIdleConns:          10,
