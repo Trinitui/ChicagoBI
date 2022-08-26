@@ -196,12 +196,12 @@ func GetCCVI(db *sql.DB) {
 
 	// While doing unit-testing keep the limit value to 500
 	// later you could change it to 1000, 2000, 10,000, etc.
-	fmt.Println("Grabbing data from Chicago Data...")
+	fmt.Println("CCVI: Grabbing data from Chicago Data...")
 	var url = "https://data.cityofchicago.org/resource/xhc6-88s9.json"
 
 	tr := &http.Transport{
 		MaxIdleConns:        10,
-		IdleConnTimeout:     300 * time.Second,
+		IdleConnTimeout:     600 * time.Second,
 		DisableCompression:  true,
 		TLSHandshakeTimeout: 1000 * time.Second,
 	}
@@ -214,12 +214,12 @@ func GetCCVI(db *sql.DB) {
 		panic(err)
 	}
 
-	fmt.Println("Starting JSON unmarshalling...")
+	fmt.Println("CCVI: Starting JSON unmarshalling...")
 	body, _ := ioutil.ReadAll(res.Body)
 	var ccvi_list CCVIJsonRecords
 	json.Unmarshal(body, &ccvi_list)
-	fmt.Println("JSON unmarshalling done...")
-	fmt.Println("Now unpacking JSON and inserting into db... ")
+	fmt.Println("CCVI: JSON unmarshalling done...")
+	fmt.Println("CCVI: Now unpacking JSON and inserting into db... ")
 	for i := 0; i < len(ccvi_list); i++ {
 
 		// We will execute definsive coding to check for messy/dirty/missing data values
@@ -317,7 +317,7 @@ func GetCovidData(db *sql.DB) {
 
 	// While doing unit-testing keep the limit value to 500
 	// later you could change it to 1000, 2000, 10,000, etc.
-	fmt.Println("Grabbing data from Chicago Data...")
+	fmt.Println("CovidData: Grabbing data from Chicago Data...")
 	var url = "https://data.cityofchicago.org/resource/yhhz-zm2v.json"
 
 	tr := &http.Transport{
@@ -335,12 +335,12 @@ func GetCovidData(db *sql.DB) {
 		panic(err)
 	}
 
-	fmt.Println("Starting JSON unmarshalling...")
+	fmt.Println("CovidData: Starting JSON unmarshalling...")
 	body, _ := ioutil.ReadAll(res.Body)
 	var covid_list CovidDataJsonRecords
 	json.Unmarshal(body, &covid_list)
-	fmt.Println("JSON unmarshalling done...")
-	fmt.Println("Now unpacking JSON and inserting into db... ")
+	fmt.Println("CovidData: JSON unmarshalling done...")
+	fmt.Println("CovidData: Now unpacking JSON and inserting into db... ")
 	for i := 0; i < len(covid_list); i++ {
 
 		// We will execute definsive coding to check for messy/dirty/missing data values
@@ -441,7 +441,7 @@ func GetBuildingPermits(db *sql.DB) {
 
 	// While doing unit-testing keep the limit value to 500
 	// later you could change it to 1000, 2000, 10,000, etc.
-	fmt.Println("Grabbing data from Chicago Data...")
+	fmt.Println("BuildingPermits: Grabbing data from Chicago Data...")
 	var url = "https://data.cityofchicago.org/resource/ydr8-5enu.json"
 
 	tr := &http.Transport{
@@ -459,12 +459,12 @@ func GetBuildingPermits(db *sql.DB) {
 		panic(err)
 	}
 
-	fmt.Println("Starting JSON unmarshalling...")
+	fmt.Println("BuildingPermits: Starting JSON unmarshalling...")
 	body, _ := ioutil.ReadAll(res.Body)
 	var building_permits_list BuildingPermitsJsonRecords
 	json.Unmarshal(body, &building_permits_list)
-	fmt.Println("JSON unmarshalling done...")
-	fmt.Println("Now unpacking JSON and inserting into db... ")
+	fmt.Println("BuildingPermits: JSON unmarshalling done...")
+	fmt.Println("BuildingPermits: Now unpacking JSON and inserting into db... ")
 	for i := 0; i < len(building_permits_list); i++ {
 
 		// We will execute definsive coding to check for messy/dirty/missing data values
@@ -552,7 +552,7 @@ func GetTaxiTrips(db *sql.DB) int {
 
 	// While doing unit-testing keep the limit value to 500
 	// later you could change it to 1000, 2000, 10,000, etc.
-	fmt.Println("Grabbing data from Chicago Data...")
+	fmt.Println("TaxiTrips: Grabbing data from Chicago Data...")
 	var url = "https://data.cityofchicago.org/resource/npd7-ywjz.json?$limit=1000000"
 
 	tr := &http.Transport{
@@ -576,12 +576,12 @@ func GetTaxiTrips(db *sql.DB) int {
 		panic(err)
 	}
 
-	fmt.Println("Starting JSON unmarshalling...")
+	fmt.Println("TaxiTrips: Starting JSON unmarshalling...")
 	body, _ := ioutil.ReadAll(res.Body)
 	var taxi_trips_list TaxiTripsJsonRecords
 	json.Unmarshal(body, &taxi_trips_list)
-	fmt.Println("JSON unmarshalling done...")
-	fmt.Println("Now unpacking JSON and inserting into db... ")
+	fmt.Println("TaxiTrips: JSON unmarshalling done...")
+	fmt.Println("TaxiTrips: Now unpacking JSON and inserting into db... ")
 	if len(taxi_trips_list) == 0 {
 		fmt.Println("No Data in Taxi Trips")
 		return 0
@@ -749,7 +749,7 @@ func GetTransportTrips(db *sql.DB) {
 
 	// While doing unit-testing keep the limit value to 500
 	// later you could change it to 1000, 2000, 10,000, etc.
-	fmt.Println("Grabbing data from Chicago Data...")
+	fmt.Println("TransportProviders: Grabbing data from Chicago Data...")
 	var url = "https://data.cityofchicago.org/resource/m6dm-c72p.json"
 
 	tr := &http.Transport{
@@ -934,7 +934,7 @@ func GetUnemploymentData(db *sql.DB) {
 
 	// While doing unit-testing keep the limit value to 500
 	// later you could change it to 1000, 2000, 10,000, etc.
-	fmt.Println("Grabbing data from Chicago Data...")
+	fmt.Println("UnemploymentData: Grabbing data from Chicago Data...")
 	var url = "https://data.cityofchicago.org/resource/iqnk-2tcu.json"
 
 	tr := &http.Transport{
@@ -952,12 +952,12 @@ func GetUnemploymentData(db *sql.DB) {
 		panic(err)
 	}
 
-	fmt.Println("Starting JSON unmarshalling...")
+	fmt.Println("UnemploymentData: Starting JSON unmarshalling...")
 	body, _ := ioutil.ReadAll(res.Body)
 	var unemployment_list UnemploymentJsonRecords
 	json.Unmarshal(body, &unemployment_list)
-	fmt.Println("JSON unmarshalling done...")
-	fmt.Println("Now unpacking JSON and inserting into db... ")
+	fmt.Println("UnemploymentData: JSON unmarshalling done...")
+	fmt.Println("UnemploymentData: Now unpacking JSON and inserting into db... ")
 	for i := 0; i < len(unemployment_list); i++ {
 
 		// We will execute definsive coding to check for messy/dirty/missing data values
